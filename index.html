@@ -403,166 +403,139 @@ border: none;
             object-fit: cover;
             border-radius: 50%;
         }
-/* --- GALERIE : tourbillon de vignettes --- */
-.gallery-swirl-wrapper {
+/* --- GALERIE : bouton rond "Voir la galerie" avec mini-vignettes --- */
+.gallery-preview-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.gallery-bubble-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
 }
 
-.swirl-container {
+.gallery-bubble {
     position: relative;
-    width: min(420px, 90vw);
-    height: min(420px, 90vw);
+    width: min(320px, 80vw);
+    height: min(320px, 80vw);
+    border-radius: 50%;
+    padding: 6px;
+    background: linear-gradient(135deg,
+        var(--rose-pastel),
+        var(--peche),
+        var(--vert-clair),
+        var(--bleu-clair)
+    );
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* base commune des vignettes */
-.swirl-item {
+.gallery-bubble-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-bubble-overtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texte-clair);
+    margin-bottom: 0.4rem;
+}
+
+.gallery-bubble-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--lavande);
+    margin-bottom: 0.5rem;
+}
+
+.gallery-bubble-text {
+    font-size: 0.95rem;
+    color: var(--texte-fonce);
+    max-width: 15rem;
+}
+
+/* mini-vignettes autour du cercle */
+.gallery-bubble-thumb {
     position: absolute;
-    top: 50%;
-    left: 50%;
     border-radius: 50%;
     overflow: hidden;
-    padding: 4px;
-    background: linear-gradient(135deg, var(--rose-pastel), var(--peche), var(--vert-clair), var(--bleu-clair));
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    border: 3px solid #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* tailles : centre minuscule, puis petit, moyen, grand */
-.swirl-big {
-    width: 150px;
-    height: 150px;
+/* tailles décroissantes mais lisibles */
+.gallery-thumb-lg {
+    width: 78px;
+    height: 78px;
 }
 
-.swirl-medium {
-    width: 110px;
-    height: 110px;
+.gallery-thumb-md {
+    width: 62px;
+    height: 62px;
 }
 
-.swirl-small {
-    width: 80px;
-    height: 80px;
-}
-
-.swirl-tiny {
+.gallery-thumb-sm {
     width: 50px;
     height: 50px;
 }
 
-/* contenu interne (photo) */
-.swirl-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    overflow: hidden;
-    background: #fdf5fb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.25s ease;
+/* positions autour du rond */
+.gallery-thumb-top {
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.swirl-inner img {
+.gallery-thumb-right {
+    top: 50%;
+    right: -4px;
+    transform: translateY(-50%);
+}
+
+.gallery-thumb-bottom {
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gallery-thumb-left {
+    top: 50%;
+    left: -4px;
+    transform: translateY(-50%);
+}
+
+.gallery-bubble-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* hover doux sans casser la position */
-.swirl-item:hover .swirl-inner {
-    transform: scale(1.06);
+/* hover */
+.gallery-preview-link:hover .gallery-bubble {
+    transform: scale(1.03);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
 }
 
-/* --- positions : rosette / tourbillon propre et lisible --- */
-
-/* centre */
-.swirl-11 {
-    transform: translate(-50%, -50%) translate(0, 0);
-}
-
-/* anneau interne (petit) – rayon ~70px */
-.swirl-10 {
-    transform: translate(-50%, -50%) rotate(0deg) translate(70px) rotate(0deg);
-}
-.swirl-9 {
-    transform: translate(-50%, -50%) rotate(120deg) translate(70px) rotate(-120deg);
-}
-.swirl-8 {
-    transform: translate(-50%, -50%) rotate(240deg) translate(70px) rotate(-240deg);
-}
-
-/* anneau moyen – rayon ~130px */
-.swirl-7 {
-    transform: translate(-50%, -50%) rotate(45deg) translate(130px) rotate(-45deg);
-}
-.swirl-6 {
-    transform: translate(-50%, -50%) rotate(165deg) translate(130px) rotate(-165deg);
-}
-.swirl-5 {
-    transform: translate(-50%, -50%) rotate(285deg) translate(130px) rotate(-285deg);
-}
-
-/* anneau externe – rayon ~185px */
-.swirl-4 {
-    transform: translate(-50%, -50%) rotate(20deg) translate(185px) rotate(-20deg);
-}
-.swirl-3 {
-    transform: translate(-50%, -50%) rotate(110deg) translate(185px) rotate(-110deg);
-}
-.swirl-2 {
-    transform: translate(-50%, -50%) rotate(200deg) translate(185px) rotate(-200deg);
-}
-.swirl-1 {
-    transform: translate(-50%, -50%) rotate(290deg) translate(185px) rotate(-290deg);
-}
-
-/* responsive : on réduit tout mais on garde la structure ronde */
 @media (max-width: 768px) {
-    .swirl-container {
-        width: min(320px, 90vw);
-        height: min(320px, 90vw);
-    }
-
-    .swirl-big {
-        width: 120px;
-        height: 120px;
-    }
-
-    .swirl-medium {
-        width: 90px;
-        height: 90px;
-    }
-
-    .swirl-small {
-        width: 60px;
-        height: 60px;
-    }
-
-    .swirl-tiny {
-        width: 40px;
-        height: 40px;
-    }
-
-    /* on rapproche un peu les rayons sur mobile */
-    .swirl-10,
-    .swirl-9,
-    .swirl-8 {
-        transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translate(55px) rotate(calc(var(--angle, 0deg) * -1));
-    }
-
-    .swirl-7,
-    .swirl-6,
-    .swirl-5 {
-        transform: translate(-50%, -50%) rotate(var(--angle2, 0deg)) translate(105px) rotate(calc(var(--angle2, 0deg) * -1));
-    }
-
-    .swirl-4,
-    .swirl-3,
-    .swirl-2,
-    .swirl-1 {
-        transform: translate(-50%, -50%) rotate(var(--angle3, 0deg)) translate(150px) rotate(calc(var(--angle3, 0deg) * -1));
+    .gallery-bubble {
+        width: min(280px, 90vw);
+        height: min(280px, 90vw);
     }
 }
+
 
 /* TARIFS */
 .tarifs-grid {
@@ -1093,74 +1066,34 @@ background: linear-gradient(135deg, var(--rose-pastel), var(--peche), var(--vert
         Découvrez quelques-unes de mes créations – cliquez pour voir toute la galerie.
     </p>
 
-    <div class="gallery-swirl-wrapper">
-         <a href="galerie.html" class="swirl-container">
-            <!-- grand cercle extérieur -->
-            <div class="swirl-item swirl-big swirl-1">
-                <div class="swirl-inner">
-                    <img src="images/galerie-1.jpg" alt="Maquillage 1">
+      <a href="galerie.html" class="gallery-preview-link">
+        <div class="gallery-bubble-wrapper">
+            <div class="gallery-bubble">
+                <div class="gallery-bubble-inner">
+                    <p class="gallery-bubble-overtitle">Découvrir les réalisations</p>
+                    <p class="gallery-bubble-title">Voir la galerie photos</p>
+                    <p class="gallery-bubble-text">
+                        Parcourez les maquillages enfants, adultes, bar à paillettes et tatouages éphémères.
+                    </p>
                 </div>
-            </div>
-            <div class="swirl-item swirl-big swirl-2">
-                <div class="swirl-inner">
-                    <img src="images/galerie-2.jpg" alt="Maquillage 2">
-                </div>
-            </div>
-            <div class="swirl-item swirl-big swirl-3">
-                <div class="swirl-inner">
-                    <img src="images/galerie-3.jpg" alt="Maquillage 3">
-                </div>
-            </div>
-            <div class="swirl-item swirl-big swirl-4">
-                <div class="swirl-inner">
-                    <img src="images/galerie-4.jpg" alt="Maquillage 4">
-                </div>
-            </div>
 
-            <!-- anneau moyen -->
-            <div class="swirl-item swirl-medium swirl-5">
-                <div class="swirl-inner">
-                    <img src="images/galerie-5.jpg" alt="Maquillage 5">
+                <!-- 4 mini-vignettes autour du bouton -->
+                <div class="gallery-bubble-thumb gallery-thumb-lg gallery-thumb-top">
+                    <img src="images/galerie-1.jpg" alt="Maquillage artistique 1">
+                </div>
+                <div class="gallery-bubble-thumb gallery-thumb-md gallery-thumb-right">
+                    <img src="images/galerie-2.jpg" alt="Maquillage artistique 2">
+                </div>
+                <div class="gallery-bubble-thumb gallery-thumb-sm gallery-thumb-bottom">
+                    <img src="images/galerie-3.jpg" alt="Maquillage artistique 3">
+                </div>
+                <div class="gallery-bubble-thumb gallery-thumb-md gallery-thumb-left">
+                    <img src="images/galerie-4.jpg" alt="Maquillage artistique 4">
                 </div>
             </div>
-            <div class="swirl-item swirl-medium swirl-6">
-                <div class="swirl-inner">
-                    <img src="images/galerie-6.jpg" alt="Maquillage 6">
-                </div>
-            </div>
-            <div class="swirl-item swirl-medium swirl-7">
-                <div class="swirl-inner">
-                    <img src="images/galerie-7.jpg" alt="Maquillage 7">
-                </div>
-            </div>
-
-            <!-- anneau interne -->
-            <div class="swirl-item swirl-small swirl-8">
-                <div class="swirl-inner">
-                    <img src="images/galerie-8.jpg" alt="Maquillage 8">
-                </div>
-            </div>
-            <div class="swirl-item swirl-small swirl-9">
-                <div class="swirl-inner">
-                    <img src="images/galerie-9.jpg" alt="Maquillage 9">
-                </div>
-            </div>
-            <div class="swirl-item swirl-small swirl-10">
-                <div class="swirl-inner">
-                    <img src="images/galerie-10.jpg" alt="Maquillage 10">
-                </div>
-            </div>
-
-            <!-- centre -->
-            <div class="swirl-item swirl-tiny swirl-11">
-                <div class="swirl-inner">
-                    <img src="images/galerie-11.jpg" alt="Maquillage 11">
-                </div>
-            </div>
-        </a>
-    </div>
+        </div>
+    </a>
 </section>
-
 
 <!-- TARIFS -->
 <section id="tarifs">
